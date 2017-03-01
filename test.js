@@ -3,6 +3,7 @@ const crypto = require('crypto')
 const Amorph = require('amorph')
 const chai = require('chai')
 const chaiAmorph = require('chai-amorph')
+const random = require('random-amorph')
 
 chai.use(chaiAmorph)
 chai.should()
@@ -56,4 +57,23 @@ describe('utils', () => {
       })
     })
   })
+  describe('linked keys', () => {
+    [true, false].forEach((isCompressed) => {
+      describe(`isCompressed:${isCompressed}`, () => {
+        const link = random(32)
+        let linkedPublicKey
+        let linkedPrivateKey
+        it('should derive linkedPublicKey from publicKey', () => {
+          linkedPrivateKey = utils.deriveLinkedPrivateKey(link, privateKey, isCompressed)
+        })
+        it('should derive linkedPrivateKey from privateKey', () => {
+          linkedPublicKey = utils.deriveLinkedPublicKey(link, compressedPublicKey, isCompressed)
+        })
+        it('should be able to derive linkedPublicKey from linkedPrivateKey', () => {
+          utils.derivePublicKey(linkedPrivateKey, isCompressed).should.amorphEqual(linkedPublicKey)
+        })
+      })
+    })
+  })
+
 })
