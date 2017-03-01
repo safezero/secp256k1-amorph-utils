@@ -63,10 +63,10 @@ describe('utils', () => {
         const link = random(32)
         let linkedPublicKey
         let linkedPrivateKey
-        it('should derive linkedPublicKey from publicKey', () => {
-          linkedPrivateKey = utils.deriveLinkedPrivateKey(link, privateKey, isCompressed)
-        })
         it('should derive linkedPrivateKey from privateKey', () => {
+          linkedPrivateKey = utils.deriveLinkedPrivateKey(link, privateKey)
+        })
+        it('should derive linkedPublicKey from publicKey', () => {
           linkedPublicKey = utils.deriveLinkedPublicKey(link, compressedPublicKey, isCompressed)
         })
         it('should be able to derive linkedPublicKey from linkedPrivateKey', () => {
@@ -75,5 +75,4 @@ describe('utils', () => {
       })
     })
   })
-
 })

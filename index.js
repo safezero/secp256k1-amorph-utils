@@ -55,8 +55,8 @@ exports.deriveLinkedPublicKey = function deriveLinkedPublicKey(link, publicKey, 
   return new Amorph(linkedPublicKeyPoint.encode('hex', isCompressed), 'hex')
 }
 
-exports.deriveLinkedPrivateKey = function deriveLinkedPrivateKey(link, privateKey, isCompressed) {
-  arguguard('deriveLinkedPrivateKey', [Amorph, Amorph, 'boolean'], arguments)
+exports.deriveLinkedPrivateKey = function deriveLinkedPrivateKey(link, privateKey) {
+  arguguard('deriveLinkedPrivateKey', [Amorph, Amorph], arguments)
   const privateKeyBn = privateKey.to('bn').add(link.to('bn')).mod(ec.n)
   return new Amorph(privateKeyBn, 'bn')
 }
