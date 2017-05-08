@@ -1,9 +1,15 @@
 const utils = require('./')
 const crypto = require('crypto')
 const Amorph = require('amorph')
+const amorphBufferPlugin = require('amorph-buffer')
+const amorphBnPlugin = require('amorph-bn')
 const chai = require('chai')
 const chaiAmorph = require('chai-amorph')
 const random = require('random-amorph')
+
+Amorph.loadPlugin(amorphBufferPlugin)
+Amorph.loadPlugin(amorphBnPlugin)
+Amorph.ready()
 
 chai.use(chaiAmorph)
 chai.should()
