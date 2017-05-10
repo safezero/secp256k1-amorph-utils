@@ -9,7 +9,8 @@ const random = require('random-amorph')
 
 Amorph.loadPlugin(amorphBufferPlugin)
 Amorph.loadPlugin(amorphBnPlugin)
-Amorph.ready()
+Amorph.crossConverter.addPath(['buffer', 'hex', 'bn'])
+Amorph.crossConverter.addPath(['bn', 'hex', 'buffer'])
 
 chai.use(chaiAmorph)
 chai.should()
@@ -23,7 +24,7 @@ describe('utils', () => {
     privateKey = utils.generatePrivateKey()
   })
   it('private key should be 32 bytes', () => {
-    privateKey.to('array').should.have.length(32)
+    privateKey.to('uint8Array').should.have.length(32)
   })
   it('privateKey should verify', () => {
     utils.verifyPrivateKey(privateKey).should.equal(true)
@@ -33,8 +34,8 @@ describe('utils', () => {
     compressedPublicKey = utils.derivePublicKey(privateKey, true)
   })
   it('public keys should have correct length', () => {
-    uncompressedPublicKey.to('array').should.have.length(65)
-    compressedPublicKey.to('array').should.have.length(33)
+    uncompressedPublicKey.to('uint8Array').should.have.length(65)
+    compressedPublicKey.to('uint8Array').should.have.length(33)
   })
   it('public keys should veriy', () => {
     utils.verifyPublicKey(uncompressedPublicKey).should.equal(true)

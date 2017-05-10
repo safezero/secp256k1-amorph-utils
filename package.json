@@ -19,15 +19,15 @@
   "dependencies": {
     "arguguard": "^2.1.1",
     "elliptic": "^6.4.0",
-    "random-amorph": "0.0.1",
+    "random-amorph": "^1.0.0",
     "secp256k1": "^3.2.5"
   },
   "devDependencies": {
-    "amorph": "^1.1.0",
+    "amorph": "^2.0.0",
     "amorph-bn": "0.0.1",
     "amorph-buffer": "^1.1.2",
     "chai": "^3.5.0",
-    "chai-amorph": "0.0.2",
+    "chai-amorph": "0.0.5",
     "mocha": "^3.2.0",
     "time-require": "^0.1.2"
   }
