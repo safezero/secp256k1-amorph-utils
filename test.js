@@ -21,7 +21,7 @@ describe('utils', () => {
   let compresedPublicKey
 
   it('should generate private key', () => {
-    privateKey = utils.generatePrivateKey()
+    privateKey = utils.generatePrivateKey(Amorph)
   })
   it('private key should be 32 bytes', () => {
     privateKey.to('uint8Array').should.have.length(32)
@@ -51,9 +51,9 @@ describe('utils', () => {
         [true, false].forEach((isHashed) => {
           describe(`isHashed:${isHashed}`, () => {
             it('should derive mirrors', () => {
-              const alicePrivateKey = utils.generatePrivateKey()
+              const alicePrivateKey = utils.generatePrivateKey(Amorph)
               const alicePublicKey = utils.derivePublicKey(alicePrivateKey, true)
-              const bobPrivateKey = utils.generatePrivateKey()
+              const bobPrivateKey = utils.generatePrivateKey(Amorph)
               const bobPublicKey = utils.derivePublicKey(bobPrivateKey, false)
               utils.deriveEcdhKey(alicePrivateKey, bobPublicKey, isCompressed, isHashed).should.amorphEqual(
                 utils.deriveEcdhKey(bobPrivateKey, alicePublicKey, isCompressed, isHashed)
@@ -67,7 +67,7 @@ describe('utils', () => {
   describe('linked keys', () => {
     [true, false].forEach((isCompressed) => {
       describe(`isCompressed:${isCompressed}`, () => {
-        const link = random(32)
+        const link = random(Amorph, 32)
         let linkedPublicKey
         let linkedPrivateKey
         it('should derive linkedPrivateKey from privateKey', () => {

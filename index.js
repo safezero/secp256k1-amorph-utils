@@ -6,11 +6,11 @@ const EC = require('elliptic').ec
 
 const ec = exports.ec = new EC('secp256k1')
 
-exports.generatePrivateKey = function generatePrivateKey() {
-  arguguard('generatePrivateKey', [], arguments)
+exports.generatePrivateKey = function generatePrivateKey(Amorph) {
+  arguguard('generatePrivateKey', ['Function'], arguments)
   let privateKey
   do {
-    privateKey = random(32)
+    privateKey = random(Amorph, 32)
   } while (!secp256k1.privateKeyVerify(privateKey.to('buffer')))
   return privateKey
 }
